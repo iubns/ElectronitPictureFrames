@@ -127,11 +127,11 @@
             alert(imageName);
         }
         
-        window.open('','_parent',''); 
-        window.close();
         //카카오 웹으로 들어온다면 크롬으로 키기
         if(navigator.userAgent.includes('KAKAO')){
             //location.href='http://intent://www.iubns.net/ElectronPictureFrames#Intent;scheme=http;package=com.android.chrome;end';
+            window.open('','_parent',''); 
+            window.close();
         }
             
     </script>
