@@ -45,7 +45,7 @@
         async function addImage(loadImageCount){
             loadImageCount += cunnretImageCount;
             for(let index = cunnretImageCount; index < <?= count($images) ?> && index < loadImageCount; index++){
-                await new Promise(resolve => setTimeout(resolve, 1000));
+                await new Promise(resolve => setTimeout(resolve, 500));
                 let imageName = imageNames[index];
                 //debounce
                 if(imageName === lastAddImageName){
@@ -122,9 +122,22 @@
             image.classList.remove('deleteWatingImage');
         }
 
-        function mouseClickImage(imageName){
+        async function mouseClickImage(imageName){
             const image = document.getElementById(imageName);
-            alert(imageName);
+
+            let formData = new FormData();
+            formData.append('fileName', imageName);
+
+            if(confirm('정말로 삭제 하시겠습니까?')){
+                const result = await fetch(`./delete.php`, {
+                    method: 'POST',
+                    body: formData,
+                })
+
+                console.log(result.body)
+                //Todo: 확인 로직 나중에..
+                alert('삭제 되었습니다.')
+            }
         }
         
         //카카오 웹으로 들어온다면 크롬으로 키기
